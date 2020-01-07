@@ -1,0 +1,21 @@
+<div class="form-wrapper">
+  <%= simple_form_for @interview, html: { class: 'form-horizontal', multipart: true } do |f| %>
+    
+    <div class="form-group">
+      <%= f.input :start_time %>
+    </div>
+    <div class="form-group text-center">
+      <%= f.input :end_time %>
+    </div>
+    <div class="form-group text-center">
+      <%= f.input :title %>
+    </div>
+    <%= label_tag(:p, "Participants Email id(Separated by commas):") %>
+    <%= text_field_tag(:p) %>
+    <div class="form-group text-center">
+      <%= f.button :submit, class: 'btn-success' %>
+    </div>
+    
+
+  <% end %>
+</div>

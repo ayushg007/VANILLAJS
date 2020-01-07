@@ -1,0 +1,16 @@
+<div class="form-wrapper">
+  <%= simple_form_for @participant, html: { class: 'form-horizontal', multipart: true } do |f| %>
+    <div class="form-group">
+      <%= f.input :email %>
+    </div>
+    <div class="form-group text-center">
+      <%= f.input :resume%>
+    </div>
+
+    <div class="form-group text-center">
+      <%= f.button :submit, class: 'btn-success' %>
+    </div>
+    
+
+  <% end %>
+</div>

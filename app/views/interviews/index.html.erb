@@ -1,0 +1,29 @@
+<h1> INTERVIEWS </h1>
+<table>
+  <tr>
+    <th>||  Title  ||</th>
+    <th>||  Start Time  ||</th>
+    <th>||  End Time   ||</th>
+    <th>|| Participants ||</th>
+   </tr>
+ 
+  <% @interviews.each do |interview| %>
+    <tr>
+      <td>|| <%= interview.title %>           || </td>
+      <td>|| <%= interview.start_time %>        || </td>
+      <td>|| <%= interview.end_time %>     || </td>
+      <td>
+      <% @participants=interview.participants %>
+      <% @participants.each do |participant| %>
+        || <%= participant.email %>     || 
+        || <%= link_to "Show Resume" ,participant.resume.url %>     || 
+        </br>
+      <% end %>
+      </td>
+      <td><%= link_to 'Show Interview Details', interview_path(interview) %></td>
+    </tr>
+  <% end %>
+  
+</table>
+</br></br>
+<%= link_to 'New', new_interview_path %>
