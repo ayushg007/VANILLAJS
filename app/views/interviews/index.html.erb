@@ -1,7 +1,13 @@
+<% if flash[:alert] %>
+      <div id="alert">
+         <%= flash[:alert] %> 
+      </div>
+<% end %>
 <h1> INTERVIEWS </h1>
 <table>
   <tr>
     <th>||  Title  ||</th>
+    <th>||  Date ||</th>
     <th>||  Start Time  ||</th>
     <th>||  End Time   ||</th>
     <th>|| Participants ||</th>
@@ -10,6 +16,7 @@
   <% @interviews.each do |interview| %>
     <tr>
       <td>|| <%= interview.title %>           || </td>
+      <td>|| <%= interview.date %>           || </td>
       <td>|| <%= interview.start_time %>        || </td>
       <td>|| <%= interview.end_time %>     || </td>
       <td>

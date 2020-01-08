@@ -12,21 +12,21 @@ class InterviewsController < ApplicationController
 
     def create
         if(not Interview.create_interview(interview_params,params[:p]))
-            flash[:alert]="Overlap"
-            redirect_to "google.com"
+            flash[:alert]="Sorry couldn't create ...its overlapping with previous participant interviews!!!"
+            redirect_to interviews_path
+        else
+            #@interview = Interview.create(interview_params)
+            emails=params[:p]
+            emails=emails.split(",")
+            @interview=Interview.create(interview_params)
+            for email in emails do
+                participant=Participant.where(["email= :e",{e: email}]).first
+                @interview.participants << participant
+                InterviewMailer.with(interview: @interview, participant: participant).new_interview_email.deliver_now
+            end
+            flash[:success] = "Thank you for your interview! We'll get contact you soon!"
+            redirect_to interviews_path
         end
-        
-        #@interview = Interview.create(interview_params)
-        emails=params[:p]
-        emails=emails.split(",")
-        @interview=Interview.create(interview_params)
-        for email in emails do
-            participant=Participant.where(["email= :e",{e: email}]).first
-            @interview.participants << participant
-            InterviewMailer.with(interview: @interview, participant: participant).new_interview_email.deliver_now
-        end
-        flash[:success] = "Thank you for your interview! We'll get contact you soon!"
-        redirect_to interviews_path
     end
 
     def show
@@ -57,7 +57,7 @@ class InterviewsController < ApplicationController
 
     private
         def interview_params
-            params.require(:interview).permit(:start_time, :end_time, :title, :p)
+            params.require(:interview).permit(:start_time, :end_time, :title,:date, :p)
         end
 
         def set_interview

@@ -1,4 +1,9 @@
 <div class="form-wrapper">
+<% if flash[:alert] %>
+      <div id="alert">
+         <%= flash[:alert] %> 
+      </div>
+<% end %>
   <%= simple_form_for @interview, html: { class: 'form-horizontal', multipart: true } do |f| %>
     
     <div class="form-group">
@@ -6,6 +11,9 @@
     </div>
     <div class="form-group text-center">
       <%= f.input :end_time %>
+    </div>
+    <div class="form-group text-center">
+      <%= f.input :date %>
     </div>
     <div class="form-group text-center">
       <%= f.input :title %>

@@ -6,7 +6,7 @@ class Interview < ApplicationRecord
     def self.interview_non_overlap(participant)
         prevInterviews = participant.interviews
         for prevInterview in prevInterviews do
-          if prevInterview.end_time.to_date < @interview.start_time.to_date or prevInterview.start_time.to_date > @interview.end_time.to_date
+          if (prevInterview.date == @interview.date) and (prevInterview.end_time.to_date < @interview.start_time.to_date or prevInterview.start_time.to_date > @interview.end_time.to_date)
             return true
           else
             return false

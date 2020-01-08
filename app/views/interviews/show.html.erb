@@ -3,12 +3,17 @@
      Title: <%= @interview.title %>
     </h3>
     <p class="title">
+    
+     End Time: <%= @interview.date %>
+    </p>
+    <p class="title">
      Start_time: <%= @interview.start_time%>
     </p>
     <p class="title">
     
      End Time: <%= @interview.end_time %>
     </p>
+    
     <h4> Participants</h4>
     <% @participants.each do |participant| %>
       || <%= participant.email %>     || 
