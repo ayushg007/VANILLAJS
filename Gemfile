@@ -4,6 +4,7 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
+gem 'sidekiq'
 gem 'paperclip', '~> 4.2' 
 gem 'simple_form'
 gem 'delayed_job_active_record'
@@ -53,3 +54,13 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+group :development, :test do
+
+  # Use RSpec for specs
+  gem 'rspec-rails', '>= 3.5.0'
+
+  # Use Factory Girl for generating random test data
+  gem 'factory_girl_rails'
+end
+gem 'record_tag_helper', '~> 1.0'
+gem 'jquery-rails'

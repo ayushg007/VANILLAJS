@@ -1,0 +1,24 @@
+<div class="card">
+<%= div_for interview do  %>
+ 
+  <div class="container">
+  <h3> Interview : <%= @c %> </h3>
+Title: <%= interview.title %> </br>       
+Date:  <%= interview.date.to_formatted_s( :long_ordinal) %>    </br> 
+Start Time: <%= DateTime.strptime(interview.start_time.to_i.to_s,'%s').to_s(:time) %>   </br>    
+End Time:  <%= DateTime.strptime(interview.end_time.to_i.to_s,'%s').to_s(:time) %>  </br> 
+Participants:</br> 
+      <% @participants=interview.participants %>
+      <% @participants.each do |participant| %>
+        || <%= participant.email %>     || 
+        || <%= link_to "Download Resume", participant.resume.url , download: 'resume' %>     || 
+        </br>
+      <% end %>
+    <div>
+      <td> <%= link_to "Edit Interview", edit_interview_path(interview) ,remote:true%> </td>
+      <td> <%= link_to "Delete Interview", interview_path(interview), method: :delete, data: { confirm: "Are you sure you want to delete this interview?" } %></td>
+    </div>
+    </div>
+      <%end%>
+</div>
+      

@@ -5,11 +5,17 @@ class Interview < ApplicationRecord
 
     def self.interview_non_overlap(participant)
         prevInterviews = participant.interviews
+        
         for prevInterview in prevInterviews do
-          if (prevInterview.date == @interview.date) and (prevInterview.end_time.to_date < @interview.start_time.to_date or prevInterview.start_time.to_date > @interview.end_time.to_date)
-            return true
-          else
+          print(@interview.start_time.strftime( "%H%M%S%N" )..@interview.end_time.strftime( "%H%M%S%N" ))
+          print(prevInterview.start_time.strftime( "%H%M%S%N" )..prevInterview.end_time.strftime( "%H%M%S%N" ))
+          print((@interview.start_time.strftime( "%H%M%S%N" )..@interview.end_time.strftime( "%H%M%S%N" )).overlaps?(prevInterview.start_time.strftime( "%H%M%S%N" )..prevInterview.end_time.strftime( "%H%M%S%N" )))
+          print(prevInterview.date == @interview.date) 
+          print((@interview.start_time.strftime( "%H%M%S%N" )..@interview.end_time.strftime( "%H%M%S%N" )).overlaps?(prevInterview.start_time.strftime( "%H%M%S%N" )..prevInterview.end_time.strftime( "%H%M%S%N" )))
+          if (prevInterview.date == @interview.date) and (@interview.start_time.strftime( "%H%M%S%N" )..@interview.end_time.strftime( "%H%M%S%N" )).overlaps?(prevInterview.start_time.strftime( "%H%M%S%N" )..prevInterview.end_time.strftime( "%H%M%S%N" )) 
             return false
+          else
+            return true
           end
         end
     end
@@ -39,7 +45,6 @@ class Interview < ApplicationRecord
         emails=emails.split(",")
         for email in emails do
             participant=Participant.where(["email= :e",{e: email}]).first
-            print(participant)
             if(not interview_non_overlap(participant))
                 return false
             end

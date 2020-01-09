@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200108074343) do
+ActiveRecord::Schema.define(version: 20200108084430) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
@@ -28,8 +28,12 @@ ActiveRecord::Schema.define(version: 20200108074343) do
   end
 
   create_table "interview_has_participants", force: :cascade do |t|
+    t.integer "interview_id", null: false
+    t.integer "participants_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["interview_id"], name: "index_interview_has_participants_on_interview_id"
+    t.index ["participants_id"], name: "index_interview_has_participants_on_participants_id"
   end
 
   create_table "interview_participants", force: :cascade do |t|

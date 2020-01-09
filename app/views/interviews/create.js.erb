@@ -1,0 +1,4 @@
+$('form').hide();
+$('.my-interview').append('<%= j render partial: “interview”, locals: {interview: @interview} %>');
+
+$('.new-interview-button').show();

@@ -1,10 +1,5 @@
 <div class="form-wrapper">
-<% if flash[:alert] %>
-      <div id="alert">
-         <%= flash[:alert] %> 
-      </div>
-<% end %>
-  <%= simple_form_for @interview, html: { class: 'form-horizontal', multipart: true } do |f| %>
+  <%= simple_form_for @interview,remote:true, html: { class: 'form-horizontal', multipart: true } do |f| %>
     
     <div class="form-group">
       <%= f.input :start_time %>
@@ -22,7 +17,10 @@
     <%= text_field_tag(:p) %>
     <div class="form-group text-center">
       <%= f.button :submit, class: 'btn-success' %>
+      |
+      <%= button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true %>
     </div>
+    
     
 
   <% end %>

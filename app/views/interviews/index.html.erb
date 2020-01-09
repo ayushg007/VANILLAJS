@@ -4,33 +4,17 @@
       </div>
 <% end %>
 <h1> INTERVIEWS </h1>
-<table>
-  <tr>
-    <th>||  Title  ||</th>
-    <th>||  Date ||</th>
-    <th>||  Start Time  ||</th>
-    <th>||  End Time   ||</th>
-    <th>|| Participants ||</th>
-   </tr>
- 
+
+ <div class="my-interview">
+ <% @c=0 %>
   <% @interviews.each do |interview| %>
-    <tr>
-      <td>|| <%= interview.title %>           || </td>
-      <td>|| <%= interview.date %>           || </td>
-      <td>|| <%= interview.start_time %>        || </td>
-      <td>|| <%= interview.end_time %>     || </td>
-      <td>
-      <% @participants=interview.participants %>
-      <% @participants.each do |participant| %>
-        || <%= participant.email %>     || 
-        || <%= link_to "Show Resume" ,participant.resume.url %>     || 
-        </br>
-      <% end %>
-      </td>
-      <td><%= link_to 'Show Interview Details', interview_path(interview) %></td>
-    </tr>
+    <% @c+=1 %> 
+     <%= render interview %>
+     </br>
+     </br>
   <% end %>
+  </div >
   
-</table>
+
 </br></br>
-<%= link_to 'New', new_interview_path %>
+<%= link_to 'Add New', new_interview_path ,remote:true,class:"new-interview-button" %>

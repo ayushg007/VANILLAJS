@@ -1,0 +1,2 @@
+$('form').hide();
+$('div#<%= dom_id(@interview) %>').replaceWith('<%= j render partial: "interview", locals: {interview: @interview} %>');
