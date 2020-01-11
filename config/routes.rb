@@ -4,4 +4,8 @@ Rails.application.routes.draw do
   resources :participants
   root 'interviews#index'
   get '/hello-world' => "participants#hello_world"
+  get '/home' => "interviews#home"
+  get '/addnew' => "interviews#new"
+  get '/interviews/:id/edit' => "interviews#show"
+
 end

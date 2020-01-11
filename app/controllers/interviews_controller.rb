@@ -10,6 +10,12 @@ class InterviewsController < ApplicationController
         #respond_with(@interviews)
     end
 
+    def home
+        @interviews=Interview.all
+
+        render json:@interviews
+    end
+
     def new
         @interview=Interview.new
     end
@@ -34,12 +40,16 @@ class InterviewsController < ApplicationController
             end
             flash[:success] = "Thank you for your interview! We'll get contact you soon!"
             #render json: @interview
-            redirect_to root_path
+            #redirect_to root_path
         end
     end
 
     def show
-        #render json: @interview
+        @participants = @interview.participants
+        render :json => {
+            interview: @interview,
+            participants: @participants
+        }
     end
 
     def edit
@@ -51,12 +61,17 @@ class InterviewsController < ApplicationController
         if(params[:cancel])
             redirect_to root_path
         else
+            @prev_interview_participants=InterviewParticipant.where("interview_id = ?",@interview.id)
+            @prev_interview_participants.destroy_all
             @interview.update(interview_params)
-            @participants=@interview.participants
-            for p in @participants do
-                InterviewMailer.with(interview: @interview,participant: p).update_interview_email.deliver_now
+            emails=params[:p]
+            emails=emails.split(",")
+            for email in emails do
+                participant=Participant.where(["email= :e",{e: email}]).first
+                @interview.participants << participant
+                InterviewMailer.with(interview: @interview, participant: participant).update_interview_email.deliver_now
             end
-            redirect_to root_path
+            #redirect_to root_path
         end
 
         #render json: @interview

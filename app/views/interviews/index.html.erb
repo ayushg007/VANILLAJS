@@ -1,20 +1,8 @@
-<% if flash[:alert] %>
-      <div id="alert">
-         <%= flash[:alert] %> 
-      </div>
-<% end %>
-<h1> INTERVIEWS </h1>
 
- <div class="my-interview">
- <% @c=0 %>
-  <% @interviews.each do |interview| %>
-    <% @c+=1 %> 
-     <%= render interview %>
-     </br>
-     </br>
-  <% end %>
-  </div >
-  
 
-</br></br>
-<%= link_to 'Add New', new_interview_path ,remote:true,class:"new-interview-button" %>
+    <h1> INTERVIEWS</h1>
+
+    <div id="page_container" class="container pageEntry" >
+        <article> Loading....</article>
+    </div>
+    
