@@ -5,6 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 gem 'sidekiq'
+gem 'rack-cors' , :require => 'rack/cors'
 gem 'paperclip', '~> 4.2' 
 gem 'simple_form'
 gem 'delayed_job_active_record'

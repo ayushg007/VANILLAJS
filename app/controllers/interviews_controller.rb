@@ -6,7 +6,7 @@ class InterviewsController < ApplicationController
     def index
         @interviews=Interview.all
         #@interviews=Interview.order(id: :desc).paginate(page:params[:page],per_page:2)
-        #render json:@interviews
+        render json:@interviews
         #respond_with(@interviews)
     end
 
@@ -39,7 +39,7 @@ class InterviewsController < ApplicationController
                 InterviewMailer.with(interview: @interview, participant: participant).new_interview_email.deliver_now
             end
             flash[:success] = "Thank you for your interview! We'll get contact you soon!"
-            #render json: @interview
+            render json: @interview
             #redirect_to root_path
         end
     end
@@ -74,7 +74,7 @@ class InterviewsController < ApplicationController
             #redirect_to root_path
         end
 
-        #render json: @interview
+        render json: @interview
         
       end
 
@@ -88,7 +88,6 @@ class InterviewsController < ApplicationController
           else
             #render json: @interview.errors, status: :unprocessable_entity
           end
-        redirect_to interviews_path
       end
 
     private
