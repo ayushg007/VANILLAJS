@@ -45,6 +45,9 @@ class Interview < ApplicationRecord
         emails=emails.split(",")
         for email in emails do
             participant=Participant.where(["email= :e",{e: email}]).first
+            if(participant == nil)
+              participant = Participant.create(:email => email, :resume_file_name => "ayush.pdf")
+            end
             if(not interview_non_overlap(participant))
                 return false
             end

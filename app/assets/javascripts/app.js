@@ -64,6 +64,7 @@ let InterviewShow = {
             <section class="section">
                 
                 <h1> Interview Title : ${interview.title} </h1>
+                <p> Interview date : ${interview.date} </p>
                 <p> Interview start : ${interview.start_time} </p>
                 <p> Interview End : ${interview.end_time} </p>
             <h3> Participants </h3>`+participantsHTML+
